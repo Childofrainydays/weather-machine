@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+ 
+.spacer {
+  aspect-ratio: 960/120;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+}
+
+.divider {
+  background-image: url(../images/stacked-waves-haikei.svg);
+  }
