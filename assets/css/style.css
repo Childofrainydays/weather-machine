@@ -7,7 +7,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
 }
 
 button {
@@ -28,4 +27,12 @@ button {
 
 .divider {
   background-image: url(../images/stacked-waves-haikei.svg);
+  }
+
+  .grey {
+    background: #9EB3C2;
+  }
+
+  .blue {
+    background: #21295C;
   }
