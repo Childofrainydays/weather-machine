@@ -40,15 +40,44 @@ body {
   background-image: url(../images/stacked-waves-haikei.svg);
 }
 
+/* Style the search box */
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/*for search bar*/
 .search-bar {
+  width: 400px;
+  padding: 10px;
+  border: none;
   font-size: 24px;
   border-radius: 10px;
 }
 
+.fa-magnifying-glass {
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.fa-location-dot {
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+}
+
+/*for weather boxes*/
 .weather-box {
   background-color: #fff;
 }
 
+/*for more specific elements*/
 button {
     background: none;
     border: none;

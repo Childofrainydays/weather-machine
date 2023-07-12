@@ -1,4 +1,7 @@
-// Neat trick to get the current location of the user for weather data learned from Developedbyed on YouTube
+// API key for OpenWeatherMap
+const api = 'API_URL_HERE';
+
+// Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
 window.addEventListener('load', () => {
     
     let long;
@@ -8,7 +11,13 @@ window.addEventListener('load', () => {
         navigator.geolocation.getCurrentPosition(position => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
+
         });
+
+        fetch(api)
+            .then(response => {
+                return response.json();
+            })
     }
 });
 
