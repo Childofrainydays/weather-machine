@@ -3,13 +3,15 @@ const searchBar = document.querySelector('.search-bar');
 const weatherList = document.querySelector('.weather-list');
 
 // Code to hide the .weather-box container
+// Grouped the code together for better readability instead of at the top with the others
 const weatherBox = document.querySelector('.weather-box');
 weatherBox.style.display = 'none'; // Hide the container initially
 
-// API key for OpenWeatherMap
+// TODO: API key for OpenWeatherMap
 const api = 'API_URL_HERE';
 
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
+// He used an arrow function for this code
 window.addEventListener('load', () => {
     
     let long;
@@ -31,25 +33,27 @@ window.addEventListener('load', () => {
     }
 });
 
-// Function to get the weather data from the API
-searchBar.addEventListener('input', () => {
-    const location = searchBar.value;
+// Function to fetch weather data using the API for a specific location
+// Event listener for input in the search bar
+searchBar.addEventListener('input', function() {
+  const location = searchBar.value;
   
-    // Fetch the weather data from the API
-    // EDIT THE URL BELOW WITH OWN API KEY
-    const api = 'API_URL_HERE';
-
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api}`)
-    .then(response => {
-        return response.json();
+  // Fetch the weather data from the API for the searched location
+  // TODO: EDIT THE URL BELOW WITH OWN API KEY
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api}`)
+    .then(function(response) {
+      return response.json();
     })
-    .then(weatherData => {
-        const parsedWeatherData = JSON.parse(weatherData);
-
-        // Do something with the parsed weather data.
+    .then(function(weatherData) {
+      displayWeatherInfo(weatherData);
     })
-    .catch(error => {
-        // Handle any errors that occur during the fetch request
-        console.log('Error:', error.message);
+    // Catch any errors as good practice
+    .catch(function(error) {
+      console.log('Error:', error.message);
     });    
-  });
+});
+
+// Function to display the weather data in the .weather-box container
+// TODO: Define the displayWeatherInfo function with a weatherData parameter
+// TODO: Access the required weather data from the weatherData object
+// TODO: Append the weather information elements to the weather list container
