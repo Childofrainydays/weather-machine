@@ -1,3 +1,11 @@
+// References to the search bar and weather list container
+const searchBar = document.querySelector('.search-bar');
+const weatherList = document.querySelector('.weather-list');
+
+// Code to hide the .weather-box container
+const weatherBox = document.querySelector('.weather-box');
+weatherBox.style.display = 'none'; // Hide the container initially
+
 // API key for OpenWeatherMap
 const api = 'API_URL_HERE';
 
@@ -20,7 +28,3 @@ window.addEventListener('load', () => {
             })
     }
 });
-
-// References to the search bar and weather list container
-const searchBar = document.querySelector('.search-bar');
-const weatherList = document.querySelector('.weather-list');
