@@ -64,13 +64,29 @@ function displayWeatherInfo(weatherData) {
   const humidity = weatherData.main.humidity;
   const windSpeed = weatherData.wind.speed;
 
-  // HTML elements to display the weather data for each property
-  const cityNameElement = document.querySelector('.location');
-  const temperatureElement = document.querySelector('.degrees');
-  const descriptionElement = document.querySelector('.weather-description');
-  const humidityElement = document.querySelector('.humidity');
-  const windSpeedElement = document.querySelector('.wind-speed');
+  // Create HTML elements to display the weather data for each property
+  const cityNameElement = document.createElement('h2');
+  cityNameElement.textContent = cityName;
 
+  const temperatureElement = document.createElement('h2');
+  temperatureElement.textContent = `${temperature}°C`;
 
-  // TODO: Display the .weather-box container
+  const descriptionElement = document.createElement('p');
+  descriptionElement.textContent = `Weather: ${weatherDescription}`;
+
+  const humidityElement = document.createElement('p');
+  humidityElement.textContent = `Humidity: ${humidity}%`;
+
+  const windSpeedElement = document.createElement('p');
+  windSpeedElement.textContent = `Wind Speed: ${windSpeed} m/s`;
+
+  // Append the elements to the .weather-list container
+  weatherList.appendChild(cityNameElement);
+  weatherList.appendChild(temperatureElement);
+  weatherList.appendChild(descriptionElement);
+  weatherList.appendChild(humidityElement);
+  weatherList.appendChild(windSpeedElement);
+
+  // Display the .weather-box container
+  weatherBox.style.display = 'block';
 }
