@@ -11,7 +11,6 @@ weatherBox.style.display = 'none'; // Hide the container initially
 const api = 'API_URL_HERE';
 
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
-// He used an arrow function for this code
 window.addEventListener('load', () => {
     
     let long;
@@ -54,6 +53,24 @@ searchBar.addEventListener('input', function() {
 });
 
 // Function to display the weather data in the .weather-box container
-// TODO: Define the displayWeatherInfo function with a weatherData parameter
-// TODO: Access the required weather data from the weatherData object
-// TODO: Append the weather information elements to the weather list container
+function displayWeatherInfo(weatherData) {
+  // Clear previous entries
+  weatherList.innerHTML = '';
+
+  // Access the weather data from the API by using properties
+  const cityName = weatherData.name;
+  const temperature = weatherData.main.temp;
+  const weatherDescription = weatherData.weather[0].description;
+  const humidity = weatherData.main.humidity;
+  const windSpeed = weatherData.wind.speed;
+
+  // HTML elements to display the weather data for each property
+  const cityNameElement = document.querySelector('.location');
+  const temperatureElement = document.querySelector('.degrees');
+  const descriptionElement = document.querySelector('.weather-description');
+  const humidityElement = document.querySelector('.humidity');
+  const windSpeedElement = document.querySelector('.wind-speed');
+
+
+  // TODO: Display the .weather-box container
+}
