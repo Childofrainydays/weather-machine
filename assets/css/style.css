@@ -27,7 +27,7 @@ body {
   background: #21295C;
 }
 
-/*for section transition banner*/
+/* container for section transition banner. SPACER CLASS IS HERE TO PROVIDE THE DIMENSIONS OF THE BANNER, DO NOT REMOVE OR IT WILL MAKE YOU SAD */
 .spacer {
   aspect-ratio: 960/120;
   width: 100%;
@@ -36,7 +36,7 @@ body {
   background-size: cover; 
 }
 
-/*section transition banner image*/
+/* section transition banner image */
 .divider {
   background-image: url(../images/stacked-waves-haikei.svg);
 }
@@ -49,7 +49,7 @@ body {
   margin-top: 30px;
 }
 
-/*for search bar*/
+/* for search bar */
 .search-bar {
   width: 400px;
   padding: 10px;
@@ -75,12 +75,12 @@ body {
   border-radius: 0 5px 5px 0;
 }
 
-/*for more specific elements*/
+/* for more specific elements */
 button {
   cursor: pointer;
 }
 
-/*for weather boxes*/
+/* for weather boxes */
 .weather-list {
   display: flex;
   flex-wrap: wrap;
@@ -89,7 +89,8 @@ button {
 }
 
 .weather-box {
-  width: calc(100% / 7); /*use the power of math to display 7 days horizontally */
+  display: none; /* Initially hide the container */
+  width: calc(100% / 7); /* use the power of math to display 7 days horizontally */
   padding: 20px;
   background-color: #f2f2f2;
   border-radius: 5px;
@@ -97,3 +98,16 @@ button {
   text-align: center;
 }
 
+/* Details for weather information display */
+.weather-box h2.location {
+  margin-bottom: 10px;
+}
+
+.temperature {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.weather-details p {
+  margin-bottom: 5px;
+}
