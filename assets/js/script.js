@@ -8,7 +8,7 @@ const weatherBox = document.querySelector('.weather-box');
 weatherBox.style.display = 'none'; // Hide the container initially
 
 // TODO: API key for OpenWeatherMap
-const api = 'API_URL_HERE';
+const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
 
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
 window.addEventListener('load', () => {
@@ -39,7 +39,7 @@ searchBar.addEventListener('input', function() {
   
   // Fetch the weather data from the API for the searched location
   // TODO: EDIT THE URL BELOW WITH OWN API KEY
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api}`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
     .then(function(response) {
       return response.json();
     })
