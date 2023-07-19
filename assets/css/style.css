@@ -89,7 +89,7 @@ button {
 }
 
 .weather-box {
-  display: none; /* Initially hide the container */
+  
   width: calc(100% / 7); /* use the power of math to display 7 days horizontally */
   padding: 20px;
   background-color: #f2f2f2;

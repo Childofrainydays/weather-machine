@@ -7,29 +7,35 @@ const weatherList = document.querySelector('.weather-list');
 const weatherBox = document.querySelector('.weather-box');
 weatherBox.style.display = 'none'; // Hide the container initially
 
-// TODO: API key for OpenWeatherMap
+// API key for OpenWeatherMap
 const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
 
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
 window.addEventListener('load', () => {
     
-    let long;
-    let lat;
+  let long;
+  let lat;
 
-    // Check if the browser supports geolocation
-    if (navigator.geolocation) {
+  // Check if the browser supports geolocation
+  if (navigator.geolocation) {
       // Get the current position of the user
-        navigator.geolocation.getCurrentPosition(position => {
-            long = position.coords.longitude;
-            lat = position.coords.latitude;
+      navigator.geolocation.getCurrentPosition(position => {
+          long = position.coords.longitude;
+          lat = position.coords.latitude;
 
-        });
-
-        fetch(api)
-            .then(response => {
-                return response.json();
-            })
-    }
+          // Fetch the weather data from the API for the user's LONG and LAT
+          fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${api}`)
+              .then(response => {
+                  return response.json();
+              })
+              .then(weatherData => {
+                  displayWeatherInfo(weatherData);
+              })
+              .catch(error => {
+                  console.log('Error:', error.message);
+              });
+      });
+  }
 });
 
 // Function to fetch weather data using the API for a specific location
@@ -37,9 +43,8 @@ window.addEventListener('load', () => {
 searchBar.addEventListener('input', function() {
   const location = searchBar.value;
   
-  // Fetch the weather data from the API for the searched location
-  // TODO: EDIT THE URL BELOW WITH OWN API KEY
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
+  // Fetch the weather data from the API for the searched LOCATION
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api}`)
     .then(function(response) {
       return response.json();
     })
@@ -59,7 +64,13 @@ function displayWeatherInfo(weatherData) {
 
   // Access the weather data from the API by using properties
   const cityName = weatherData.name;
-  const temperature = weatherData.main.temp;
+  const temperatureKelvin = weatherData.main.temp; // Temperature in Kelvin
+
+  // Convert temperature OUT of Kelvin so Salt Lake isn't listed as 303 degrees
+  const temperatureCelsius = temperatureKelvin - 273.15;
+  // Code to convert temperature to Fahrenheit 
+  const temperatureFahrenheit = (temperatureCelsius * 9) / 5 + 32;
+
   const weatherDescription = weatherData.weather[0].description;
   const humidity = weatherData.main.humidity;
   const windSpeed = weatherData.wind.speed;
@@ -69,7 +80,7 @@ function displayWeatherInfo(weatherData) {
   cityNameElement.textContent = cityName;
 
   const temperatureElement = document.createElement('h2');
-  temperatureElement.textContent = `${temperature}°C`;
+  temperatureElement.textContent = `${temperatureCelsius.toFixed(1)}°C`; // Display temperature in Celsius with one decimal place
 
   const descriptionElement = document.createElement('p');
   descriptionElement.textContent = `Weather: ${weatherDescription}`;

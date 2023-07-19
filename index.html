@@ -27,20 +27,25 @@
 
     <section class="grey expand">
         <div class="container weather-list">
-            <!-- Weather boxes will be dynamically added here -->
-            <div class="weather-box">
-                <h2 class="location"></h2>
-                <div class="temperature">
-                    <h2 class="degrees"></h2>
-                </div>
-                <div class="weather-details">
-                    <p class="weather-description"></p>
-                    <p class="humidity"></p>
-                    <p class="wind-speed"></p>
-                </div>
+          <!-- Weather boxes will be dynamically added here -->
+          <div class="weather-box">
+            <h2 class="location"></h2>
+            <div class="temperature">
+              <h2 class="degrees"></h2>
+              <div class="unit-btns">
+                <!--Attempt to be able to switch between °C and °F-->
+                <button class="unit-btn active" data-unit="celsius">°C</button>
+                <button class="unit-btn" data-unit="fahrenheit">°F</button>
+              </div>
             </div>
+            <div class="weather-details">
+              <p class="weather-description"></p>
+              <p class="humidity"></p>
+              <p class="wind-speed"></p>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>      
 
     <!-- JS script link -->
     <script src="./assets/js/script.js" type="module"></script>
