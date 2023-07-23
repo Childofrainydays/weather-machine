@@ -2,6 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100vh;
+  font-family: 'Aldrich', sans-serif;
 }
 
 body {
@@ -86,10 +87,10 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 40px;
+  background-color: #fff;
 }
 
 .weather-box {
-  
   width: calc(100% / 7); /* use the power of math to display 7 days horizontally */
   padding: 20px;
   background-color: #f2f2f2;

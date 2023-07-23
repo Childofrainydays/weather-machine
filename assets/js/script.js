@@ -10,6 +10,9 @@ weatherBox.style.display = 'none'; // Hide the container initially
 // API key for OpenWeatherMap
 const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
 
+// Variable to keep track of the current unit of measurement for the temperature
+let currentUnit = "celsius";
+
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
 window.addEventListener('load', () => {
     
@@ -38,24 +41,17 @@ window.addEventListener('load', () => {
   }
 });
 
-// Function to fetch weather data using the API for a specific location
-// Event listener for input in the search bar
-searchBar.addEventListener('input', function() {
-  const location = searchBar.value;
-  
-  // Fetch the weather data from the API for the searched LOCATION
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api}`)
-    .then(function(response) {
-      return response.json();
+// Function to fetch weather data using the API 
+function fetchWeatherData(location) {
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${api}`)
+    .then((response) => response.json())
+    .then((forecastData) => {
+      displayForecastInfo(forecastData);
     })
-    .then(function(weatherData) {
-      displayWeatherInfo(weatherData);
-    })
-    // Catch any errors as good practice
-    .catch(function(error) {
+    .catch((error) => {
       console.log('Error:', error.message);
-    });    
-});
+    });
+}
 
 // Function to display the weather data in the .weather-box container
 function displayWeatherInfo(weatherData) {
@@ -67,9 +63,10 @@ function displayWeatherInfo(weatherData) {
   const temperatureKelvin = weatherData.main.temp; // Temperature in Kelvin
 
   // Convert temperature OUT of Kelvin so Salt Lake isn't listed as 303 degrees
+  // Shoutout to Todd for the catch 
   const temperatureCelsius = temperatureKelvin - 273.15;
   // Code to convert temperature to Fahrenheit 
-  const temperatureFahrenheit = (temperatureCelsius * 9) / 5 + 32;
+  const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
 
   const weatherDescription = weatherData.weather[0].description;
   const humidity = weatherData.main.humidity;
@@ -82,6 +79,23 @@ function displayWeatherInfo(weatherData) {
   const temperatureElement = document.createElement('h2');
   temperatureElement.textContent = `${temperatureCelsius.toFixed(1)}°C`; // Display temperature in Celsius with one decimal place
 
+  // Add click event listeners to the degree buttons to toggle between Celsius and Fahrenheit
+  const unitButtons = document.querySelectorAll('.unit-btn');
+  // For each button, add a click event listener
+  unitButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const unit = button.dataset.unit;
+      // if the unit is different than the current unit, update the temperature and unit
+      if (unit !== currentUnit) {
+        currentUnit = unit;
+        temperatureElement.textContent = `${getTemperature(unit === "celsius" ? temperatureCelsius : temperatureFahrenheit)}${getUnitSymbol(unit)}`;
+        // Update the active class for the buttons to highlight the selected unit
+        unitButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+      }
+    });
+  });
+
+  // Create elements for the weather description, humidity, and wind speed
   const descriptionElement = document.createElement('p');
   descriptionElement.textContent = `Weather: ${weatherDescription}`;
 
@@ -101,3 +115,9 @@ function displayWeatherInfo(weatherData) {
   // Display the .weather-box container
   weatherBox.style.display = 'block';
 }
+
+// Event listener for input in the search bar
+searchBar.addEventListener('input', function () {
+  const location = searchBar.value;
+  fetchWeatherData(location);
+});
