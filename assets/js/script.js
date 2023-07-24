@@ -5,7 +5,6 @@ const weatherList = document.querySelector('.weather-list');
 // Code to hide the .weather-box container
 // Grouped the code together for better readability instead of at the top with the others
 const weatherBox = document.querySelector('.weather-box');
-weatherBox.style.display = 'none'; // Hide the container initially
 
 // API key for OpenWeatherMap
 const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
@@ -54,28 +53,30 @@ function fetchWeatherData(location) {
 }
 
 // Function to display the weather data in the .weather-box container
-function displayWeatherInfo(weatherData) {
+function displayForecastInfo(forecastData) {
   // Clear previous entries
   weatherList.innerHTML = '';
 
-  // Access the weather data from the API by using properties
-  const cityName = weatherData.name;
-  const temperatureKelvin = weatherData.main.temp; // Temperature in Kelvin
+  // Access the forecast data from the API by using properties
+  const forecastList = forecastData.list;
 
-  // Convert temperature OUT of Kelvin so Salt Lake isn't listed as 303 degrees
-  // Shoutout to Todd for the catch 
-  const temperatureCelsius = temperatureKelvin - 273.15;
-  // Code to convert temperature to Fahrenheit 
-  const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
+  // Create a loop to iterate through the forecast data for each day
+  for (let i = 0; i < forecastList.length; i += 8) { // Fetch data for every 24 hours (8 data points per day)
+    const forecastDate = new Date(forecastList[i].dt * 1000);
+    const temperatureKelvin = forecastList[i].main.temp; // Temperature in Kelvin
 
-  const weatherDescription = weatherData.weather[0].description;
-  const humidity = weatherData.main.humidity;
-  const windSpeed = weatherData.wind.speed;
+    // Convert temperature OUT of Kelvin
+    const temperatureCelsius = temperatureKelvin - 273.15;
+    const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
 
-  // Create HTML elements to display the weather data for each property
-  const cityNameElement = document.createElement('h2');
-  cityNameElement.textContent = cityName;
+    const weatherDescription = forecastList[i].weather[0].description;
+    const humidity = forecastList[i].main.humidity;
+    const windSpeed = forecastList[i].wind.speed;
 
+    // Create HTML elements to display the weather data for each property
+    const forecastDateElement = document.createElement('h2');
+    forecastDateElement.textContent = forecastDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    
   const temperatureElement = document.createElement('h2');
   temperatureElement.textContent = `${temperatureCelsius.toFixed(1)}°C`; // Display temperature in Celsius with one decimal place
 
@@ -95,26 +96,27 @@ function displayWeatherInfo(weatherData) {
     });
   });
 
-  // Create elements for the weather description, humidity, and wind speed
-  const descriptionElement = document.createElement('p');
-  descriptionElement.textContent = `Weather: ${weatherDescription}`;
+    // Create elements for the weather description, humidity, and wind speed
+    const descriptionElement = document.createElement('p');
+    descriptionElement.textContent = `Weather: ${weatherDescription}`;
 
-  const humidityElement = document.createElement('p');
-  humidityElement.textContent = `Humidity: ${humidity}%`;
+    const humidityElement = document.createElement('p');
+    humidityElement.textContent = `Humidity: ${humidity}%`;
 
-  const windSpeedElement = document.createElement('p');
-  windSpeedElement.textContent = `Wind Speed: ${windSpeed} m/s`;
+    const windSpeedElement = document.createElement('p');
+    windSpeedElement.textContent = `Wind Speed: ${windSpeed} m/s`;
 
-  // Append the elements to the .weather-list container
-  weatherList.appendChild(cityNameElement);
-  weatherList.appendChild(temperatureElement);
-  weatherList.appendChild(descriptionElement);
-  weatherList.appendChild(humidityElement);
-  weatherList.appendChild(windSpeedElement);
-
-  // Display the .weather-box container
-  weatherBox.style.display = 'block';
+    // Append the elements to the .weather-list container
+    weatherBox.appendChild(forecastDateElement);
+    weatherBox.appendChild(temperatureElement);
+    weatherBox.appendChild(descriptionElement);
+    weatherBox.appendChild(humidityElement);
+    weatherBox.appendChild(windSpeedElement);
+  }
 }
+
+// Display the .weather-box container
+weatherBox.style.display = 'block';
 
 // Event listener for input in the search bar
 searchBar.addEventListener('input', function () {

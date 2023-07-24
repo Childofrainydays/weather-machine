@@ -17,39 +17,41 @@
 </head>
 
 <body>
-    <section class="blue">
-        <div class="container">
-            <div class="search-box">
-                <i class="fa-solid fa-location-dot"></i>
-                <input type="text" class="search-bar" placeholder="Search for a location...">
-                <button class="fa-solid fa-magnifying-glass"></button>
-            </div>
-        </div>
-    </section>
-
-    <div class="spacer divider"></div>
-
-    <section class="grey expand">
-        <div class="container weather-list">
-          <!-- Weather boxes will be dynamically added here -->
-          <div class="weather-box">
-            <h2 class="location"></h2>
-            <div class="temperature">
-              <h2 class="degrees"></h2>
-              <div class="unit-btns">
-                <!--Attempt to be able to switch between °C and °F-->
-                <button class="unit-btn active" data-unit="celsius">°C</button>
-                <button class="unit-btn" data-unit="fahrenheit">°F</button>
-              </div>
-            </div>
-            <div class="weather-details">
-              <p class="weather-description"></p>
-              <p class="humidity"></p>
-              <p class="wind-speed"></p>
-            </div>
+  <section class="blue">
+    <div class="container">
+      <div class="search-box">
+        <i class="fa-solid fa-location-dot"></i>
+        <input type="text" class="search-bar" placeholder="Search for a location...">
+        <button class="fa-solid fa-magnifying-glass"></button>
+      </div>
+    </div>
+  </section>
+  
+  <div class="spacer divider"></div>
+  
+  <section class="grey expand">
+    <div class="container">
+      <div class="weather-box">
+        <h2 class="location"></h2>
+        <div class="temperature">
+          <h2 class="degrees"></h2>
+          <div class="unit-btns">
+            <!-- Attempt to be able to switch between °C and °F -->
+            <button class="unit-btn active" data-unit="celsius">°C</button>
+            <button class="unit-btn" data-unit="fahrenheit">°F</button>
           </div>
         </div>
-      </section>      
+        <div class="weather-details">
+          <p class="weather-description"></p>
+          <p class="humidity"></p>
+          <p class="wind-speed"></p>
+        </div>
+      </div>
+      <div class="weather-list">
+        <!-- Weather data will be dynamically added here -->
+      </div>
+    </div>
+  </section>    
 
     <!-- JS script link -->
     <script src="./assets/js/script.js" type="module"></script>
