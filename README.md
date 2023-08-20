@@ -9,7 +9,7 @@
 
 1. Clone the repository to your local machine.
 2. Open the `index.html` file in your preferred web browser.
-3. **OR** use the deloyed page right on GitHub
+3. **OR** use the deloyed page right on GitHub [here] (https://childofrainydays.github.io/weather-machine/)
 
 ## Usage
 
