@@ -84,7 +84,6 @@ button {
 /* for weather boxes */
 .weather-list {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   margin-top: 40px;
 }

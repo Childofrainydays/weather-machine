@@ -2,9 +2,9 @@
 const searchBar = document.querySelector('.search-bar');
 const weatherList = document.querySelector('.weather-list');
 
-// Code to hide the .weather-box container
 // Grouped the code together for better readability instead of at the top with the others
 const weatherBox = document.querySelector('.weather-box');
+const nowBox = document.querySelector('.now-box');
 
 // API key for OpenWeatherMap
 const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
@@ -13,7 +13,7 @@ const api = 'c3eb4de02f0bb80f164a363c8fa84c0e';
 let currentUnit = "celsius";
 
 // Neat trick to get the current location of the user for weather data on load learned from Developedbyed on YouTube
-window.addEventListener('load', () => {
+function getWeather(){
     
   let long;
   let lat;
@@ -31,14 +31,14 @@ window.addEventListener('load', () => {
                   return response.json();
               })
               .then(weatherData => {
-                  displayWeatherInfo(weatherData);
+                  displayForecastInfo(weatherData);
               })
               .catch(error => {
                   console.log('Error:', error.message);
               });
       });
   }
-});
+}
 
 // Function to fetch weather data using the API 
 function fetchWeatherData(location) {
@@ -57,6 +57,7 @@ function removeAllWeather(weatherBox) {
       weatherBox.removeChild(weatherBox.firstChild);
   }
 }
+
 
 // Function to display the weather data in the .weather-box container
 function displayForecastInfo(forecastData) {

@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Google Fonts link-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
-    <!--Fontawesome link-->
-    <script src="https://kit.fontawesome.com/82cb327826.js" crossorigin="anonymous"></script>
-    <!--custom css link-->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Google Fonts link-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+  <!--Fontawesome link-->
+  <script src="https://kit.fontawesome.com/82cb327826.js" crossorigin="anonymous"></script>
+  <!--custom css link-->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Document</title>
 </head>
 
 <body>
@@ -26,31 +26,37 @@
       </div>
     </div>
   </section>
-  
+
   <div class="spacer divider"></div>
-  
+
   <section class="grey expand">
+    <div class="now-box">
+      <h1 class="locationNow"></h1>
+      <div class="temperatureNow">
+        <h2 class="degreesNow"></h2>
+      </div>
+    </div>
     <div class="container">
       <div class="weather-box">
         <h2 class="location"></h2>
         <div class="temperature">
           <h2 class="degrees"></h2>
-          </div>
-        </div>
-        <div class="weather-details">
-          <p class="weather-description"></p>
-          <p class="humidity"></p>
-          <p class="wind-speed"></p>
         </div>
       </div>
-      <div class="weather-list">
-        <!-- Weather data will be dynamically added here -->
+      <div class="weather-details">
+        <p class="weather-description"></p>
+        <p class="humidity"></p>
+        <p class="wind-speed"></p>
       </div>
     </div>
-  </section>    
+    <div class="weather-list">
+      <!-- Weather data will be dynamically added here -->
+    </div>
+    </div>
+  </section>
 
-    <!-- JS script link -->
-    <script src="./assets/js/script.js" type="module"></script>
+  <!-- JS script link -->
+  <script src="./assets/js/script.js" type="module"></script>
 </body>
 
 </html>
