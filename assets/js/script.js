@@ -52,11 +52,17 @@ function fetchWeatherData(location) {
     });
 }
 
+function removeAllWeather(weatherBox) {
+  while (weatherBox.firstChild) {
+      weatherBox.removeChild(weatherBox.firstChild);
+  }
+}
+
 // Function to display the weather data in the .weather-box container
 function displayForecastInfo(forecastData) {
   // Clear previous entries
-  weatherList.innerHTML = '';
-
+  removeAllWeather(weatherBox);
+  
   // Access the forecast data from the API by using properties
   const forecastList = forecastData.list;
 
@@ -67,7 +73,7 @@ function displayForecastInfo(forecastData) {
 
     // Convert temperature OUT of Kelvin
     const temperatureCelsius = temperatureKelvin - 273.15;
-    const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
+    // const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
 
     const weatherDescription = forecastList[i].weather[0].description;
     const humidity = forecastList[i].main.humidity;
@@ -77,24 +83,8 @@ function displayForecastInfo(forecastData) {
     const forecastDateElement = document.createElement('h2');
     forecastDateElement.textContent = forecastDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     
-  const temperatureElement = document.createElement('h2');
-  temperatureElement.textContent = `${temperatureCelsius.toFixed(1)}°C`; // Display temperature in Celsius with one decimal place
-
-  // Add click event listeners to the degree buttons to toggle between Celsius and Fahrenheit
-  const unitButtons = document.querySelectorAll('.unit-btn');
-  // For each button, add a click event listener
-  unitButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const unit = button.dataset.unit;
-      // if the unit is different than the current unit, update the temperature and unit
-      if (unit !== currentUnit) {
-        currentUnit = unit;
-        temperatureElement.textContent = `${getTemperature(unit === "celsius" ? temperatureCelsius : temperatureFahrenheit)}${getUnitSymbol(unit)}`;
-        // Update the active class for the buttons to highlight the selected unit
-        unitButtons.forEach(btn => btn.classList.toggle('active', btn === button));
-      }
-    });
-  });
+    const temperatureElement = document.createElement('h2');
+    temperatureElement.textContent = `${temperatureCelsius.toFixed(1)}°C`; // Display temperature in Celsius with one decimal place
 
     // Create elements for the weather description, humidity, and wind speed
     const descriptionElement = document.createElement('p');
@@ -119,7 +109,9 @@ function displayForecastInfo(forecastData) {
 weatherBox.style.display = 'block';
 
 // Event listener for input in the search bar
-searchBar.addEventListener('input', function () {
-  const location = searchBar.value;
-  fetchWeatherData(location);
+searchBar.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    const location = searchBar.value;
+    fetchWeatherData(location);
+  }
 });
